@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) by Rui Afonso (ISEP) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ChaoDeFabrica">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Ordem" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataEmissao" type="Data" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="DataPrevista" type="Data" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="CodigoFabricoProduto" type="xs:string" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="Quantidade" type="Quantidade" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="Unidade" type="xs:string" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="Encomendas" type="Encomenda" minOccurs="1" maxOccurs="1"/>
+							<xs:element name="Estado" type="Estado" minOccurs="1" maxOccurs="1"/>
+						</xs:sequence>
+						<xs:attribute name="CodigoOrdem" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="unique-CodigoOrdem">
+			<xs:selector xpath="Ordem"/>
+			<xs:field xpath="@CodigoOrdem"/>
+		</xs:unique>
+	</xs:element>
+	<xs:simpleType name="Data">
+		<xs:restriction base="xs:int">
+			<xs:pattern value="([1-9][0-9]{3})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Quantidade">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Encomenda">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="EC[1-9][0-9]{3}[/][0-9]{5}([,]EC[1-9][0-9]{3}[/][0-9]{5})*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Estado">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="pendente|Em Execucao|Execucao Parada Temporariamente|Concluida|Suspensa"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

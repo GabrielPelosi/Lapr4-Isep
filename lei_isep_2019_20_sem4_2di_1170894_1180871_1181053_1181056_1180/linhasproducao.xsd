@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2020 rel. 2 (http://www.altova.com) by João Magalhães (ISEP) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ChaoDeFabrica">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="LinhaProducao" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:complexContent>
+							<xsd:extension base="TLinha"/>
+						</xsd:complexContent>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:unique name="unique-codigo">
+			<xsd:selector xpath="LinhaProducao"/>
+			<xsd:field xpath="@IdLinhaProducao"/>
+		</xsd:unique>
+	</xsd:element>
+
+	<xsd:complexType name="TLinha">
+		<xsd:sequence>
+			<xsd:element name="CodigoInternoMaquina" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="EstadoProcessamento" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="DataUltimoProcessamento" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+		<xsd:attribute name="IdLinhaProducao" type="xsd:long" use="required"/>
+	</xsd:complexType>
+</xsd:schema>

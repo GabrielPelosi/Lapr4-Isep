@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2020 rel. 2 (x64) (http://www.altova.com) by Rui Afonso (ISEP) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ChaoDeFabrica">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Categoria" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DescricaoCategoria" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						</xs:sequence>
+						<xs:attribute name="CodigoCategoria" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:unique name="unique-CodigoCategoria">
+			<xs:selector xpath="Categoria"/>
+			<xs:field xpath="@CodigoCategoria"/>
+		</xs:unique>
+	</xs:element>
+</xs:schema>

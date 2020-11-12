@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xsd:element name="ChaoDeFabrica">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="FichaProducao" type="TFichaProducao" minOccurs="0" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+        <xsd:unique name="unique-codigo">
+            <xsd:selector xpath="FichaProducao"/>
+            <xsd:field xpath="@CodigoFichaProducao"/>
+        </xsd:unique>
+    </xsd:element>
+    <xsd:complexType name="TFichaProducao">
+        <xsd:sequence>
+            <xsd:element name="FichaMateria" type="TFichaMateria" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="FichaQuantidade" type="TFichaQuantidade" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="FichaUnidade" type="TFichaUnidade" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="CodigoFichaProducao" type="TCodigoFichaProducao" use="required"/>
+    </xsd:complexType>
+    <xsd:simpleType name="TCodigoFichaProducao">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TFichaMateria">
+        <xsd:restriction base="xsd:string">
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TFichaQuantidade">
+        <xsd:restriction base="xsd:string">
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TFichaUnidade">
+        <xsd:restriction base="xsd:string">
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

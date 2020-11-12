@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2020 rel. 2 (http://www.altova.com) by João Magalhães (ISEP) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="ChaoDeFabrica">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Produto" maxOccurs="unbounded">
+                    <xsd:complexType>
+                        <xsd:complexContent>
+                            <xsd:extension base="TProduto"/>
+                        </xsd:complexContent>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+        </xsd:complexType>
+        <xsd:unique name="unique-codigo">
+            <xsd:selector xpath="Produto"/>
+            <xsd:field xpath="@CodigoFabrico"/>
+        </xsd:unique>
+    </xsd:element>
+
+    <xsd:complexType name="TProduto">
+        <xsd:sequence>
+            <xsd:element name="CodigoComercial" type="TCodigo"/>
+            <xsd:element name="DescricaoBreve" type="xsd:string"/>
+            <xsd:element name="DescricaoCompleta" type="xsd:string"/>
+            <xsd:element name="Unidade" type="xsd:string"/>
+            <xsd:element name="Categoria" type="xsd:string"/>
+        </xsd:sequence>
+        <xsd:attribute name="CodigoFabrico" type="TCodigo" use="required"/>
+    </xsd:complexType>
+
+    <xsd:simpleType name="TCodigo">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[A-Za-z0-9]+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

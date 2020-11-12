@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2020 rel. 2 (http://www.altova.com) by Maria Duarte (ISEP) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ChaoDeFabrica">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Maquina" type="TMaquina" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:unique name="unique-CodigoInternoMaquina">
+			<xsd:selector xpath="Maquina"/>
+			<xsd:field xpath="@CodigoInternoMaquina"/>
+		</xsd:unique>
+	</xsd:element>
+	<xsd:complexType name="TMaquina">
+		<xsd:sequence>
+			<xsd:element name="NumeroSerie" type="xsd:integer" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DescricaoMaquina" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="DataInstalacao" type="Data" maxOccurs="1"/>
+			<xsd:element name="Marca" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="Modelo" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="FicheiroConfiguracao" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="IdProtocolo" type="xsd:long" minOccurs="1" maxOccurs="1"/>
+		</xsd:sequence>
+		<xsd:attribute name="CodigoInternoMaquina" type="xsd:string" use="required"/>
+	</xsd:complexType>
+	<xsd:simpleType name="Data">
+		<xsd:restriction base="xsd:integer">
+			<xsd:pattern value="([1-9][0-9]{3})(0[0-9]|1[0-2])([0-2][0-9]|3[0-1])"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xsd:element name="ChaoDeFabrica">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="Deposito" type="TDeposito" minOccurs="1" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+        <xsd:unique name="unique-codigo">
+            <xsd:selector xpath="Deposito"/>
+            <xsd:field xpath="@CodigoDeposito"/>
+        </xsd:unique>
+    </xsd:element>
+
+    <xsd:complexType name="TDeposito">
+        <xsd:sequence>
+            <xsd:element name="DescricaoDeposito" type="TDescricao"/>
+            <xsd:element name="MateriasQuantidades" type="TMateriasQuantidades" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="ProdutosQuantidades" type="TProdutosQuantidades" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="CodigoDeposito" type="TCodigo" use="required"/>
+    </xsd:complexType>
+
+    <xsd:simpleType name="TCodigo">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="TDescricao">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[A-Za-z ]+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="TMateriasQuantidades">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[1-9][0-9]*-[0-9]+.[0-9]+([;][1-9][0-9]*-[0-9]+.[0-9]+)*"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="TProdutosQuantidades">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[1-9][0-9]*-[0-9]+.[0-9]+([;][1-9][0-9]*-[0-9]+.[0-9]+)*"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>
